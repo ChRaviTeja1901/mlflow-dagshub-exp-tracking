@@ -6,6 +6,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
+import dagshub
 
 def main():
     # Load the Iris dataset
@@ -19,7 +20,11 @@ def main():
 
     max_depth = 20
 
-    # mlflow.set_tracking_uri("http://localhost:5000")
+    
+    dagshub.init(repo_owner='ChRaviTeja1901', repo_name='mlflow-dagshub-exp-tracking', mlflow=True)
+
+
+    mlflow.set_tracking_uri("https://dagshub.com/ChRaviTeja1901/mlflow-dagshub-exp-tracking.mlflow")
 
     # Set the MLflow experiment name, every run will be recorded under this experiment and if the experiment does not exist it will be created
     mlflow.set_experiment("Iris Decision Tree Classifier")
