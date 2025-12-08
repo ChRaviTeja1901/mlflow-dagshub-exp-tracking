@@ -7,6 +7,8 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 import dagshub
+import os
+import shutil
 
 def main():
     # Load the Iris dataset
@@ -56,7 +58,17 @@ def main():
         plt.savefig("confusion_matrix.png")
         mlflow.log_artifact("confusion_matrix.png")
         mlflow.log_artifact("iris-dt.py")
-        mlflow.sklearn.log_model(model, "decision_tree_model")
+
+        # Save the sklearn model locally and log the model directory as artifacts.
+        # Dagshub's MLflow endpoint does not support the model-registry REST endpoint
+        # MLflow's `log_model` may call that endpoint; to avoid the unsupported endpoint,
+        # save the model and then upload the model folder as artifacts.
+        model_dir = "decision_tree_model"
+        if os.path.exists(model_dir):
+            shutil.rmtree(model_dir)
+        mlflow.sklearn.save_model(model, model_dir)
+        mlflow.log_artifacts(model_dir, artifact_path="decision_tree_model")
+        shutil.rmtree(model_dir)
         mlflow.set_tag("model", "Decision Tree")
         # print(mlflow.get_artifact_uri())
 
