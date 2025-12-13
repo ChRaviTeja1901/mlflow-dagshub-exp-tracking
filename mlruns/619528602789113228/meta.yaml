@@ -1,0 +1,6 @@
+artifact_location: file:///C:/Users/use/Desktop/dvc_version_control/mlflow_dagshub/mlflow-dagshub-exp-tracking/mlruns/619528602789113228
+creation_time: 1765620448173
+experiment_id: '619528602789113228'
+last_update_time: 1765620448173
+lifecycle_stage: active
+name: Iris Random Forest Classifier

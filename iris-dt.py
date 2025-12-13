@@ -57,7 +57,7 @@ def main():
 
         plt.savefig("confusion_matrix.png")
         mlflow.log_artifact("confusion_matrix.png")
-        mlflow.log_artifact("iris-dt.py")
+        mlflow.log_artifact(__file__)
 
         # Save the sklearn model locally and log the model directory as artifacts.
         # Dagshub's MLflow endpoint does not support the model-registry REST endpoint

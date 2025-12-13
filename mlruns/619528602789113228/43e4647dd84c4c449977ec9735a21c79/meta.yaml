@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/use/Desktop/dvc_version_control/mlflow_dagshub/mlflow-dagshub-exp-tracking/mlruns/619528602789113228/43e4647dd84c4c449977ec9735a21c79/artifacts
+end_time: 1765620455180
+entry_point_name: ''
+experiment_id: '619528602789113228'
+lifecycle_stage: active
+run_id: 43e4647dd84c4c449977ec9735a21c79
+run_name: gifted-lark-237
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765620448582
+status: 3
+tags: []
+user_id: use

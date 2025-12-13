@@ -1,0 +1,11 @@
+digest: aab974d2
+name: dataset
+profile: '{"num_rows": 120, "num_elements": 600}'
+schema: '{"mlflow_colspec": [{"type": "double", "name": "sepal length (cm)", "required":
+  true}, {"type": "double", "name": "sepal width (cm)", "required": true}, {"type":
+  "double", "name": "petal length (cm)", "required": true}, {"type": "double", "name":
+  "petal width (cm)", "required": true}, {"type": "long", "name": "variety", "required":
+  true}]}'
+source: '{"tags": {"mlflow.user": "use", "mlflow.source.name": ".\\iris-rf.py", "mlflow.source.type":
+  "LOCAL", "mlflow.source.git.commit": "7c6d68ffef78c6b7dfce26765f1dd55ebe428800"}}'
+source_type: code

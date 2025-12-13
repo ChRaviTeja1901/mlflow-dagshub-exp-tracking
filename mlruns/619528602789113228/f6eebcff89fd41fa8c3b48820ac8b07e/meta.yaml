@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/use/Desktop/dvc_version_control/mlflow_dagshub/mlflow-dagshub-exp-tracking/mlruns/619528602789113228/f6eebcff89fd41fa8c3b48820ac8b07e/artifacts
+end_time: 1765620530155
+entry_point_name: ''
+experiment_id: '619528602789113228'
+lifecycle_stage: active
+run_id: f6eebcff89fd41fa8c3b48820ac8b07e
+run_name: chill-whale-734
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765620523428
+status: 3
+tags: []
+user_id: use

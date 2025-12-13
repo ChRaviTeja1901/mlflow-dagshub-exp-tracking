@@ -7,6 +7,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 import dagshub
+import pandas as pd
 import os
 import shutil
 
@@ -23,8 +24,11 @@ def main():
     max_depth = 2
     n_estimators = 250
 
+    
+    # dagshub.init(repo_owner='ChRaviTeja1901', repo_name='mlflow-dagshub-exp-tracking', mlflow=True)
 
-    mlflow.set_tracking_uri("http://ec2-35-174-19-155.compute-1.amazonaws.com:5000/")
+
+    # mlflow.set_tracking_uri("https://dagshub.com/ChRaviTeja1901/mlflow-dagshub-exp-tracking.mlflow")
 
     # Set the MLflow experiment name, every run will be recorded under this experiment and if the experiment does not exist it will be created
     mlflow.set_experiment("Iris Random Forest Classifier")
@@ -56,7 +60,7 @@ def main():
 
         plt.savefig("confusion_matrix.png")
         mlflow.log_artifact("confusion_matrix.png")
-        mlflow.log_artifact(__file__)
+        mlflow.log_artifact("iris-rf.py")
 
         # Save the sklearn model locally and log the model directory as artifacts.
         # Dagshub's MLflow endpoint does not support the model-registry REST endpoint
@@ -70,6 +74,28 @@ def main():
         shutil.rmtree(model_dir)
         mlflow.set_tag("model", "Random Forest")
         # print(mlflow.get_artifact_uri())
+
+
+        # Log training and validation datasets as artifacts
+        # Convert NumPy arrays to pandas DataFrame so we can add column names
+        train_df = pd.DataFrame(X_train, columns=iris.feature_names)
+        train_df['variety'] = y_train
+
+        validation_df = pd.DataFrame(X_test, columns=iris.feature_names)
+        validation_df['variety'] = y_test
+
+        # Convert to MLflow Data objects (MLflow 2.x) then log as inputs
+        try:
+            train_mlflow = mlflow.data.from_pandas(train_df)
+            validation_mlflow = mlflow.data.from_pandas(validation_df)
+            mlflow.log_input(train_mlflow, "train_data")
+            mlflow.log_input(validation_mlflow, "validation_data")
+        except Exception:
+            # If mlflow.data.from_pandas/log_input are unavailable (older MLflow), fall back to CSV artifacts
+            train_df.to_csv("train_data.csv", index=False)
+            validation_df.to_csv("validation_data.csv", index=False)
+            mlflow.log_artifact("train_data.csv", artifact_path="train_data")
+            mlflow.log_artifact("validation_data.csv", artifact_path="validation_data")
 
 
 
